@@ -2,16 +2,19 @@ from Producto import Producto
 class Inventario:
     def __init__(self):
         self.productos = []
-
+    
+    #Añade un producto al inventario si el ID no existe.
     def anadir_producto(self, producto):
         if any(p.get_id() == producto.get_id() for p in self.productos):
             print("ID ya existente.")
         else:
             self.productos.append(producto)
-
+    
+    #Elimina un producto del inventario por su ID.
     def eliminar_producto(self, id):
         self.productos = [p for p in self.productos if p.get_id() != id]
 
+    #Actualiza la cantidad o precio de un producto identificado por su ID.
     def actualizar_producto(self, id, cantidad=None, precio=None):
         for p in self.productos:
             if p.get_id() == id:
@@ -21,15 +24,17 @@ class Inventario:
                     p.set_precio(precio)
                 return
         print("Producto no encontrado.")
-
+   
+    #Busca productos cuyo nombre coincida parcial o totalmente con el término ingresado.
     def buscar_por_nombre(self, nombre):
         return [p for p in self.productos if nombre.lower() in p.get_nombre().lower()]
 
+    #Muestra todos los productos en el inventario.
     def mostrar_productos(self):
         for p in self.productos:
             print(p)
 
-
+#Elaboración del Menú interactivo con el Usuario
 def menu():
     inventario = Inventario()
 
